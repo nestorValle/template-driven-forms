@@ -1,0 +1,67 @@
+<form class="needs-validation" #templateForm="ngForm">
+  <h2>Employee Form</h2>
+<div class="form-group">
+  <label for="firstName">First Name:</label>
+  <input [(ngModel)]="model.firstName" type="text" name="firstName" id="firstName"
+  class="form-control"
+  placeholder="First Name" aria-describedby="helpId">
+  <div class="invalid-feedback">
+      First name is requiered
+    </div>
+</div>
+<div class="form-group ">
+  <label for="lastName">Last Name</label>
+  <input
+  #lastName="ngModel"
+  [(ngModel)]="model.lastName"
+  type="text" name="lastName" id="lastName"
+  class="form-control"
+  [class.is-invalid]="lastName.invalid"
+  placeholder="Last Name"
+  aria-describedby="helpId"
+  required>
+  <div class="invalid-feedback">
+      Last name is requiered.
+    </div>
+</div>
+<div class="form-check">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="model.isFullTime" name="isFullTime" id="isFullTime" value="checkedValue" checked>
+    Full Time Employee
+  </label>
+</div>
+<label >Payment Type</label>
+<div class="form-check">
+    <input [(ngModel)]="model.paymentType" type="radio" class="form-check-input" name="paymentType" id="" value="ws" checked>
+    <label class="form-check-label">
+      WS
+    </label>
+</div>
+<div class="form-check">
+        <input type="radio" [(ngModel)]="model.paymentType" class="form-check-input" name="paymentType" id="" value="1099" >
+      <label class="form-check-label">
+        1099
+      </label>
+  </div>
+  <div class="form-group" >
+    <label class="control-label" for="primaryLanguage">Primary Language</label>
+    <select class="form-control"
+    #select="ngModel"
+    [class.is-invalid]="model.primaryLanguage === '' && select.touched"
+    name="primaryLanguage"
+      [(ngModel)]="model.primaryLanguage"
+      required>
+      <option value="">Select an option</option>
+      <option *ngFor="let lang of languages">
+        {{lang}}
+      </option>
+    </select>
+    <div class="invalid-feedback">
+        Please choose a language.
+      </div>
+  </div>
+  <button type="submit" [disabled]="templateForm.invalid" class="btn btn-primary">OK</button>
+</form>
+{{templateForm.valid}}
+{{model | json}}
+{{templateForm.value | json}}
